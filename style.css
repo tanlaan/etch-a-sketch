@@ -1,0 +1,20 @@
+* {
+    box-sizing: border-box;
+}
+.container {
+    display: grid;
+}
+.pixel {
+    width: 4.69vw;
+    height: 4.69vw;
+    border: 1px solid;
+    float: left;
+}
+
+.pixel:hover {
+    background-color: black;
+}
+
+.row {
+    grid-row: 15px;
+}
