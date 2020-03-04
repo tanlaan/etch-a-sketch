@@ -1,35 +1,55 @@
-let container = document.getElementsByClassName("container");
-let side = 16;
-let width = side;
-let height = side;
+let size = 16;
+pixelGrid();
+pixelResize();
 
+var button = document.querySelector("button");
+button.addEventListener('click', gridSelect);
 
+function pixelGrid() {
+    let width = size;
+    let height= size;
+    
+    container = document.querySelector(".container")
+    container.textContent = "";
 
-for(let i=0; i < width; i++) {
-    var rowPixel = document.createElement('div');
-    rowPixel.className = 'row';
-    for(let j=0; j < height; j++) {
-        var colPixel = document.createElement('div');
-        colPixel.className = 'pixel';
-        rowPixel.appendChild(colPixel);
+    for(let i=0; i < width; i++) {
+        var rowPixel = document.createElement('div');
+        rowPixel.className = 'row';
+        for(let j=0; j < height; j++) {
+            var colPixel = document.createElement('div');
+            colPixel.className = 'pixel';
+            rowPixel.appendChild(colPixel);
+        }
+
+        container.appendChild(rowPixel);
     }
-
-    document.getElementsByClassName("container")[0].appendChild(rowPixel);
 }
 
 function pixelResize() {
-    let pixels = document.querySelectorAll(".pixel");
     if (window.innerWidth < window.innerHeight) {
         unit = 'vw';
     } else {
         unit = 'vh';
     }
 
+    let pixels = document.querySelectorAll(".pixel");
+
     for(let i = 0; i < pixels.length; i++) {
-        pixels[i].style.width = 75/side + unit;
-        pixels[i].style.height = 75/side + unit; 
+        pixels[i].style.width = 75/size + unit;
+        pixels[i].style.height = 75/size + unit; 
     }
 }
 
-pixelResize();
+function gridSelect() {
+    let input = prompt("How big do you want your Etch-a-Sketch to be?");
+    if(input < 0 || input > 100){
+        alert('Number OutOfBounds: Selecting default size of 16.');
+        size = 16;
+    } else {
+        size = input;
+    }
+    pixelGrid();
+    pixelResize();
+}
+
 window.onresize = pixelResize;
