@@ -2,14 +2,22 @@ let size = 16;
 pixelGrid();
 pixelResize();
 
-var button = document.querySelector("button");
-button.addEventListener('click', gridSelect);
+var resize = document.querySelector("#resize");
+resize.addEventListener('click', gridSelect);
+
+var clear = document.querySelector("#clear");
+clear.addEventListener('click', function () {
+    let pixels = document.querySelectorAll(".pixel");
+    for(let i=0; i < pixels.length; i++){
+        pixels[i].className = 'pixel';
+    }
+})
 
 function pixelGrid() {
     let width = size;
     let height= size;
     
-    container = document.querySelector(".container")
+    container = document.querySelector(".container");
     container.textContent = "";
 
     for(let i=0; i < width; i++) {
@@ -18,6 +26,9 @@ function pixelGrid() {
         for(let j=0; j < height; j++) {
             var colPixel = document.createElement('div');
             colPixel.className = 'pixel';
+            colPixel.addEventListener('mouseover', function(){
+                this.className += ' selected';  
+            })
             rowPixel.appendChild(colPixel);
         }
 
