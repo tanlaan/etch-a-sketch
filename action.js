@@ -1,6 +1,8 @@
 let size = 16;
+let percent = 80;
 pixelGrid();
 pixelResize();
+
 
 var resize = document.querySelector("#resize");
 resize.addEventListener('click', gridSelect);
@@ -46,8 +48,8 @@ function pixelResize() {
     let pixels = document.querySelectorAll(".pixel");
 
     for(let i = 0; i < pixels.length; i++) {
-        pixels[i].style.width = 75/size + unit;
-        pixels[i].style.height = 75/size + unit; 
+        pixels[i].style.width = percent/size + unit;
+        pixels[i].style.height = percent/size + unit; 
     }
 }
 
